@@ -6,6 +6,10 @@ I already have a main set of dotfiles, but this repo is a cleaner and more usabl
 
 > still a work in progress
 
+
+
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/ddaf209c-26e0-407e-9b2d-352b08bf7124" />
+
 ---
 
 ## what this is for
@@ -25,75 +29,37 @@ So instead of going all out on visuals, I tried to keep things **clean, compact,
 ## main ideas behind this setup
 
 - use less screen space
-- avoid clutter
-- keep everything fast and simple
 - make it comfortable for long sessions
-- still look good, just not overdone
-
----
-
-## what’s different from my main dotfiles
-
-This version is more laptop-oriented:
-
-- **smaller Waybar** → more space for windows
-- **battery indicator** always visible
-- more attention to general laptop usability
-- **fixed wallpaper** for a cleaner look
-- simple **wallpaper changer using wofi**
-- less visual noise overall
-
-It’s basically a toned-down version that makes more sense on a laptop.
-
----
-
-## stack
-
-- Arch Linux
-- Hyprland
-- Waybar
-- wlogout
-- wofi
-- zsh
-- pywal
-- swayosd
-- brightnessctl
-- Dolphin
-- Flatpak
-- rclone (OneDrive)
-- hyprshot + satty (screenshots)
-
----
-
-## features
-
-- compact Hyprland setup
-- smaller Waybar (less vertical space used)
-- battery info in the bar
-- fixed wallpaper + wofi wallpaper selector
-- simple scripts for everyday usage
-- clean dark theme
-- built for actual daily workflow (not just screenshots)
+- keep everything visually consistent
+- avoid unnecessary clutter while still keeping a polished look
 
 ---
 
 ## wallpaper
 
-This repo includes a small wallpaper system:
+This repo includes a small wallpaper system located in the scripts folder at:
+
+`~/.config/hypr/scripts/wallpaper.sh`
+
+Main features:
 
 - default fixed wallpaper
+- **dynamic theme generation using `pywal`**
+- colors automatically applied across the system (Waybar, UI, etc.)
+- a small button located on the Waybar
 - a simple script to change wallpapers using `wofi`
+
+Every time the wallpaper changes, the **entire theme updates accordingly**, which keeps the setup consistent without needing manual tweaking.
 
 Nothing fancy, just fast and usable.
 
----
+<p align="center">
+  <img width="400" src="https://github.com/user-attachments/assets/1cc0177c-b9f7-4dda-b156-05d3f3f72d13" />
+</p>
 
-## waybar
-
-Waybar is intentionally smaller here.
-
-On a laptop, vertical space matters a lot, especially when coding or working with multiple windows.  
-So the bar stays useful, but doesn’t take more space than it should.
+<p align="center">
+  <img width="400" src="https://github.com/user-attachments/assets/3db12e02-3dbf-496b-a7c2-d451ee56e944" />
+</p>
 
 ---
 
@@ -101,13 +67,22 @@ So the bar stays useful, but doesn’t take more space than it should.
 
 This setup is slightly more tuned for laptop use:
 
-- battery visibility
+- battery visibility and usage control
+- more vertical space with reduced Waybar thickness
 - brightness / OSD tools
-- less heavy UI
-- better space usage
+- easier WiFi and Bluetooth setup with Orbit (also themed dynamically)
+- better space usage overall
 - more comfortable for long sessions
 
-Not trying to optimize everything to death, just making it feel better in real use.
+The idea is to keep the interface lightweight and usable while still benefiting from the dynamic theming.
+
+<p align="center">
+  <img width="400" src="https://github.com/user-attachments/assets/2429729f-c37c-4ba0-8609-ec9fa17acb7a" />
+</p>
+
+<p align="center">
+  <img width="400" src="https://github.com/user-attachments/assets/f1a1514f-fd9a-4763-ac57-91eaa4d0727d" />
+</p>
 
 ---
 
@@ -115,17 +90,17 @@ Not trying to optimize everything to death, just making it feel better in real u
 
 This repo is not final.
 
-I keep changing things depending on what I need, so you can expect:
+I keep adjusting things as I use the setup, especially around:
 
-- config changes
-- script updates
-- layout tweaks
-- improvements over time
+- theming consistency
+- scripts
+- Waybar modules
+- overall workflow
 
 ---
 
 ## install
 
 ```bash
-git clone https://github.com/yourusername/laptop-dotfiles.git
+git clone https://github.com/Amine-Woo/laptop-dotfiles.git
 cd laptop-dotfiles
