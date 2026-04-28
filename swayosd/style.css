@@ -1,0 +1,50 @@
+window#osd {
+    padding: 12px;
+    border-radius: 18px;
+    border: 2px solid #BDC0AB;
+    background: alpha(#1c2222, 0.88);
+}
+
+#container {
+    margin: 8px;
+}
+
+image,
+label {
+    color: #d0dadb;
+}
+
+progressbar:disabled,
+image:disabled {
+    opacity: 0.5;
+}
+
+progressbar {
+    min-height: 8px;
+    border-radius: 999px;
+    background: alpha(#919899, 0.35);
+    border: none;
+}
+
+progress {
+    min-height: 8px;
+    border-radius: 999px;
+    background: #BDC0AB;
+    border: none;
+}
+
+trough {
+    min-height: 8px;
+    border-radius: 999px;
+    background: alpha(#919899, 0.35);
+    border: none;
+}
+
+slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}

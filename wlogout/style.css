@@ -1,0 +1,78 @@
+* {
+    all: unset;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+}
+
+window {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* BOUTONS */
+
+button {
+    background-color: rgba(28, 34, 34, 0.35);
+    border-radius: 22px;
+    margin: 20px;
+
+    min-width: 180px;
+    min-height: 180px;
+
+    border: 2px solid rgba(219, 212, 175, 0.5);
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 64px;
+}
+
+/* HOVER */
+
+button:hover {
+    background-color: rgba(189, 192, 171, 0.85);
+    border-color: #BDC0AB;
+}
+
+/* ENLEVE FOCUS MOCHE */
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* TEXTE */
+
+button label {
+    margin-top: 105px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d0dadb;
+}
+
+button:hover label {
+    color: #1c2222;
+}
+
+/* ICONES (CENTREES PARFAIT) */
+
+#lock {
+    background-image: url("/home/amine/.config/wlogout/icons/lock.png");
+}
+
+#logout {
+    background-image: url("/home/amine/.config/wlogout/icons/logout.png");
+}
+
+#suspend {
+    background-image: url("/home/amine/.config/wlogout/icons/suspend.png");
+}
+
+#hibernate {
+    background-image: url("/home/amine/.config/wlogout/icons/hibernate.png");
+}
+
+#shutdown {
+    background-image: url("/home/amine/.config/wlogout/icons/shutdown.png");
+}
+
+#reboot {
+    background-image: url("/home/amine/.config/wlogout/icons/reboot.png");
+}
