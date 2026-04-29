@@ -86,6 +86,19 @@ The idea is to keep the interface lightweight and usable while still benefiting 
 
 ---
 
+## airpods
+
+A small AirPods module is included in this setup.
+
+Based on:
+https://github.com/Silverquark/waybar-airpods-module
+<p align="center">
+  <img width="455" height="302" alt="Screenshot_2026-04-29_00-42-23" src="https://github.com/user-attachments/assets/f5ad9668-2991-4c59-a502-6cae4cafc252" />
+
+</p>
+
+---
+
 ## work in progress
 
 This repo is not final.
