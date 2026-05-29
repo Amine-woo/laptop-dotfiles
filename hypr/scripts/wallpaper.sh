@@ -228,8 +228,10 @@ chmod +x ~/.config/hypr/scripts/gen-wlogout-theme.sh
 ~/.config/hypr/scripts/gen-wlogout-theme.sh
 
 pkill -x waybar || true
-while pgrep -x waybar >/dev/null; do sleep 0.1; done
+while pgrep -x waybar >/dev/null; do sleep 0.3; done
 waybar >/dev/null 2>&1 &2
+
+~/.config/hypr/scripts/restart-waybar.sh
 }
 
 main() {
