@@ -1,57 +1,45 @@
 * {
     all: unset;
-    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-family: "JetBrainsMono Nerd Font Propo", "JetBrainsMono Nerd Font", sans-serif;
 }
 
 window {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.90);
 }
 
-/* BOUTONS */
-
 button {
-    background-color: rgba(28, 34, 34, 0.35);
+    background-color: rgba(13, 33, 36, 0.65);
+    border: 2px solid rgba(56, 97, 136, 0.8);
     border-radius: 22px;
     margin: 20px;
-
     min-width: 180px;
     min-height: 180px;
-
-    border: 2px solid rgba(219, 212, 175, 0.5);
 
     background-repeat: no-repeat;
     background-position: center;
     background-size: 64px;
 }
 
-/* HOVER */
-
 button:hover {
-    background-color: rgba(189, 192, 171, 0.85);
-    border-color: #BDC0AB;
+    background-color: rgba(109, 125, 109, 0.9);
+    border-color: #6D7D6D;
 }
-
-/* ENLEVE FOCUS MOCHE */
 
 button:focus {
     outline: none;
     box-shadow: none;
 }
 
-/* TEXTE */
-
 button label {
     margin-top: 105px;
     font-size: 18px;
     font-weight: bold;
-    color: #d0dadb;
+    color: #c2cbcb;
 }
 
 button:hover label {
-    color: #1c2222;
+    color: #0D2124;
 }
-
-/* ICONES (CENTREES PARFAIT) */
 
 #lock {
     background-image: url("/home/amine/.config/wlogout/icons/lock.png");

@@ -62,7 +62,6 @@ decoration {
         enabled = true
         range = 10
         render_power = 3
-        ignore_window = true
         color = 0xcc000000
         offset = 0 0
         scale = 1.0
@@ -82,10 +81,6 @@ animations {
     animation = workspacesOut, 1, 2, easeInOutCubic, slidevert
 }
 
-dwindle {
-    pseudotile = true
-    preserve_split = true
-}
 
 master {
     mfact = 0.55
