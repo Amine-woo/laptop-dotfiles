@@ -11,6 +11,16 @@ plugins=(
   zsh-completions
 )
 
+fix() {
+  hyprctl keyword monitor "eDP-1,3000x1876@120,auto,1"
+  sleep 0.5
+  hyprctl keyword monitor "eDP-1,3000x1876@120,auto,1.33"
+
+  pkill waybar
+  sleep 0.5
+  waybar & disown
+}
+
 source $ZSH/oh-my-zsh.sh
 
 # History
