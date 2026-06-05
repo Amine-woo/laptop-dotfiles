@@ -21,6 +21,12 @@ fix() {
   waybar & disown
 }
 
+mntssd() {
+  sudo mkdir -p /mnt/windowsdisk
+  sudo mount -t ntfs-3g UUID=EC9CF6169CF5DB52 /mnt/windowsdisk -o uid=$(id -u),gid=$(id -g),rw
+  echo "SSD monté dans /mnt/windowsdisk"
+}
+
 source $ZSH/oh-my-zsh.sh
 
 # History
