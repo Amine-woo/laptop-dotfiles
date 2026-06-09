@@ -34,7 +34,7 @@
     },
 
     "custom/airpods": {
-        "exec": "~/.config/waybar/airpods.py 34:0E:22:47:89:48",
+        "exec": "python3 /home/amine/.config/waybar/airpods.py 34:0E:22:47:89:48",
         "return-type": "json",
         "format": "{icon}",
         "format-icons": {
@@ -43,7 +43,9 @@
             "connecting": "󱘖"
         },
         "on-click": "pkill -USR1 -f 'airpods\\.py'",
-        "tooltip": true
+        "tooltip": true,
+        "exec-on-event": false,
+        "restart-interval": 5
     },
 
     "custom/orbit": {
@@ -182,7 +184,9 @@
 
     "cpu": {
         "format": "󰇺 {usage}%",
-        "tooltip": true
+        "tooltip": true,
+        "tooltip-format": "CPU usage: {usage}%\nCPU temp: {temperatureC}°C",
+        
     },
 
     "memory": {
