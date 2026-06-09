@@ -57,3 +57,5 @@ export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/amine/.local/share/fl
 export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/amine/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 
 unsetopt correct
+
+eval "$(zoxide init zsh --cmd cd)"
