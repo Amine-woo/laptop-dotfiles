@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-WALLPAPER_DIR="/home/amine/Pictures/Wallpapers"
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 STATE_FILE="$HOME/.cache/current_wallpaper"
 THUMB_CACHE_DIR="$HOME/.cache/wallpaper-selector"
 
@@ -14,21 +14,26 @@ mkdir -p "$HOME/.cache"
 mkdir -p "$THUMB_CACHE_DIR"
 mkdir -p "$HOME/.config/hypr/hyprland"
 mkdir -p "$HOME/.config/orbit"
+mkdir -p "$HOME/.config/swayosd"
 
-kitty_color() {
-    awk -v key="$1" '$1 == key { sub(/^#/, "", $2); print $2; exit }' "$HOME/.cache/wal/colors-kitty.conf" 2>/dev/null
+load_pywal() {
+    set +u
+    source "$HOME/.cache/wal/colors.sh"
+    set -u
 }
 
 write_hypr_theme() {
+    load_pywal
+
     local fg bg c1 c5 c8
 
-    fg="$(kitty_color foreground || echo "ffffff")"
-    bg="$(kitty_color background || echo "111111")"
-    c1="$(kitty_color color1 || echo "ff5555")"
-    c5="$(kitty_color color5 || echo "cba6f7")"
-    c8="$(kitty_color color8 || echo "888888")"
+    fg="${foreground#\#}"
+    bg="${background#\#}"
+    c1="${color1#\#}"
+    c5="${color5#\#}"
+    c8="${color8#\#}"
 
-    cat > "$HOME/.config/hypr/hyprland/theme.conf" <<EOF
+    cat > "$HOME/.config/hypr/hyprland/theme.conf" <<EOF2
 general {
     border_size = 0
     gaps_in = 10
@@ -81,7 +86,6 @@ animations {
     animation = workspacesOut, 1, 2, easeInOutCubic, slidevert
 }
 
-
 master {
     mfact = 0.55
     new_status = master
@@ -117,25 +121,18 @@ cursor {
     hide_on_key_press = false
     hide_on_touch = true
 }
-EOF
+EOF2
 }
 
 write_orbit_theme() {
-    local fg bg c4 c5
+    load_pywal
 
-    fg="$(kitty_color foreground || echo "ffffff")"
-    bg="$(kitty_color background || echo "111111")"
-    c4="$(kitty_color color4 || echo "89b4fa")"
-    c5="$(kitty_color color5 || echo "cba6f7")"
-
-    cat > "$HOME/.config/orbit/theme.toml" <<EOF
-accent_primary = "#$c5"
-accent_secondary = "#$c4"
-background = "#$bg"
-foreground = "#$fg"
-EOF
-
-    orbit reload-theme >/dev/null 2>&1 || true
+    cat > "$HOME/.config/orbit/theme.toml" <<EOF2
+accent_primary = "$color5"
+accent_secondary = "$color4"
+background = "$background"
+foreground = "$foreground"
+EOF2
 }
 
 list_wallpapers() {
@@ -166,7 +163,10 @@ generate_menu() {
                 "$thumb"
         fi
 
-        printf 'img:%s\x00info:%s\x1f%s\n' "$thumb" "$(basename "$img")" "$img"
+        printf 'img:%s\x00info:%s\x1f%s\n' \
+            "$thumb" \
+            "$(basename "$img")" \
+            "$img"
     done < <(list_wallpapers)
 }
 
@@ -190,13 +190,55 @@ pick_with_wofi() {
     local original_name
     original_name="$(basename "${thumb_path%.*}")"
 
-    find "$WALLPAPER_DIR" -maxdepth 1 -type f -name "${original_name}.*" | head -n 1
+    find "$WALLPAPER_DIR" \
+        -maxdepth 1 \
+        -type f \
+        -name "${original_name}.*" \
+        | head -n 1
 }
 
+reload_swayosd() {
+    "$HOME/.config/hypr/scripts/swayosd-pywal.sh" || true
 
+    pkill -x swayosd-server 2>/dev/null || true
+
+    for _ in {1..20}; do
+        if ! pgrep -x swayosd-server >/dev/null; then
+            break
+        fi
+        sleep 0.05
+    done
+
+    sleep 0.2
+
+    setsid -f bash -c \
+        'swayosd-server -s "$HOME/.config/swayosd/style.css" >/tmp/swayosd.log 2>&1'
+}
+
+reload_wlogout_theme() {
+    local script="$HOME/.config/hypr/scripts/gen-wlogout-theme.sh"
+
+    if [[ -f "$script" ]]; then
+        chmod +x "$script"
+        "$script" || true
+    fi
+}
+
+reload_waybar() {
+    local script="$HOME/.config/hypr/scripts/restart-waybar.sh"
+
+    if [[ -x "$script" ]]; then
+        "$script" || true
+    else
+        pkill -x waybar 2>/dev/null || true
+        sleep 0.3
+        setsid -f bash -c 'waybar >/tmp/waybar.log 2>&1'
+    fi
+}
 
 apply_wallpaper() {
     local img="$1"
+
     [[ -f "$img" ]] || exit 1
 
     if ! pgrep -x awww-daemon >/dev/null 2>&1; then
@@ -212,26 +254,20 @@ apply_wallpaper() {
 
     printf '%s\n' "$img" > "$STATE_FILE"
 
-wal -i "$img"
+    wal -i "$img"
 
-write_hypr_theme
-write_orbit_theme
+    write_hypr_theme
+    write_orbit_theme
 
-~/.config/hypr/scripts/swayosd-pywal.sh
+    hyprctl reload >/dev/null 2>&1 || true
 
-pkill swayosd-server || true
-swayosd-server -s ~/.config/swayosd/style.css &
+    reload_swayosd
 
-hyprctl reload
+    orbit reload-theme >/dev/null 2>&1 || true
 
-chmod +x ~/.config/hypr/scripts/gen-wlogout-theme.sh
-~/.config/hypr/scripts/gen-wlogout-theme.sh
+    reload_wlogout_theme
 
-pkill -x waybar || true
-while pgrep -x waybar >/dev/null; do sleep 0.3; done
-waybar >/dev/null 2>&1 &2
-
-~/.config/hypr/scripts/restart-waybar.sh
+    reload_waybar
 }
 
 main() {
@@ -242,6 +278,8 @@ main() {
     else
         img="$(pick_with_wofi)"
     fi
+
+    [[ -n "$img" ]] || exit 0
 
     apply_wallpaper "$img"
 }

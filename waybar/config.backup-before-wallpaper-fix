@@ -198,6 +198,6 @@
     "custom/wallpaper": {
         "format": "",
         "tooltip": false,
-        "on-click": "setsid -f bash -lc '/home/amine/.config/hypr/scripts/wallpaper.sh >/tmp/wallpaper-waybar.log 2>&1'"
+        "on-click": "/home/amine/.config/hypr/scripts/wallpaper.sh"
     }
 }
