@@ -9,6 +9,3 @@ exec-once = waybar
 exec-once = flatpak run com.dec05eba.gpu_screen_recorder gsr-ui
 # Battery warning OSD
 exec-once = /home/amine/.config/hypr/scripts/battery-osd.py --watch
-
-# Global volume OSD watcher
-exec-once = /home/amine/.config/hypr/scripts/volume-osd-watch.py

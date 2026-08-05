@@ -16,9 +16,9 @@ bind = $mainMod, Z, exec, zen-browserss
 bind = , Print, exec, hyprshot -m region --raw | satty --filename - --early-exit --floating-hack
 
 #swaaaay
-bindel = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
-bindel = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindl  = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindel = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+ && swayosd-client --output-volume raise
+bindel = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && swayosd-client --output-volume lower
+bindl  = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && swayosd-client --output-volume mute-toggle
 
 bindel = , XF86MonBrightnessUp, exec, brightnessctl set 5%+ && swayosd-client --brightness raise
 bindel = , XF86MonBrightnessDown, exec, brightnessctl set 5%- && swayosd-client --brightness lower
