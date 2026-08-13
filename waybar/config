@@ -58,7 +58,6 @@
     },
 
     "clock": {
-        "timezone": "Africa/Casablanca",
         "format": "  {:%I:%M %p}",
         "tooltip-format": "  {:%d/%m/%Y}"
     },
