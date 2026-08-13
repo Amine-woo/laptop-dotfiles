@@ -259,6 +259,8 @@ apply_wallpaper() {
     write_hypr_theme
     write_orbit_theme
 
+    "$HOME/.config/hypr/scripts/gen-hyprlock-pywal.sh" || true
+
     hyprctl reload >/dev/null 2>&1 || true
 
     reload_swayosd
